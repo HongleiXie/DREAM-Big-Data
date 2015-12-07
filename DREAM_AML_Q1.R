@@ -51,7 +51,7 @@ params <- matrix(
     	),
     ncol = 4,
     byrow = TRUE
-);
+    );
 
 if (!interactive())  opt <- getopt(params);
 
