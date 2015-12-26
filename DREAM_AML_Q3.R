@@ -267,13 +267,13 @@ predict.bag.cox <- function(obj, newdata, ps = seq(0.2, 0.5, 0.1), mean.lower = 
 			oob.data <- obj$data[i.oob, ];
 
 			cox.preds <- predictSurvival(
-										 p = ps,
-										 test.link = predict(obj$model[[i]]$model, newdata = oob.data),
-										 train.link = predict(obj$model[[i]]$model, newdata = train.data),
-										 train.time = train.data[, 'Overall_Survival'],
-										 train.status = train.data[, 'vital.status'],
-										 max.time = 600
-										 );
+							p = ps,
+						    test.link = predict(obj$model[[i]]$model, newdata = oob.data),
+						    train.link = predict(obj$model[[i]]$model, newdata = train.data),
+							train.time = train.data[, 'Overall_Survival'],
+							train.status = train.data[, 'vital.status'],
+							max.time = 600
+							);
 
 			colnames(cox.preds) <- as.character(ps);
 
@@ -285,9 +285,9 @@ predict.bag.cox <- function(obj, newdata, ps = seq(0.2, 0.5, 0.1), mean.lower = 
 
 		out <- foreach(p = c(ps, 1), .combine = cbind, .inorder = TRUE) %dopar% {
 					  all.oob.pred <- Reduce(
-											 f = rbind,
-											 x = lapply(preds, FUN = function(x) x[, c('index', as.character(p))])
-											 );
+									f = rbind,
+									x = lapply(preds, FUN = function(x) x[, c('index', as.character(p))])
+									);
 					  tapply(all.oob.pred[, 2], INDEX = all.oob.pred[, 1], FUN = mean, na.rm = TRUE)
 					  };
 		colnames(out) <- as.character(c(ps, 1));
@@ -298,13 +298,13 @@ predict.bag.cox <- function(obj, newdata, ps = seq(0.2, 0.5, 0.1), mean.lower = 
 			train.data <- obj$data[i.train, ];
 
 			cox.preds <- predictSurvival(
-										 p = ps,
-										 test.link = predict(obj$model[[i]]$model, newdata = newdata),
-										 train.link = predict(obj$model[[i]]$model, newdata = train.data),
-										 train.time = train.data[, 'Overall_Survival'],
-										 train.status = train.data[, 'vital.status'],
-										 max.time = 600
-										 );
+								p = ps,
+								test.link = predict(obj$model[[i]]$model, newdata = newdata),
+								train.link = predict(obj$model[[i]]$model, newdata = train.data),
+								train.time = train.data[, 'Overall_Survival'],
+								train.status = train.data[, 'vital.status'],
+								max.time = 600
+								);
 
 			colnames(cox.preds) <- as.character(ps);
 
@@ -402,8 +402,18 @@ outfile.test <- data.frame(
 					   check.names = FALSE
                        );
 
-write.csv(x = outfile.train, file = file.path(path.output, 'Chipmunks-AML_subchallenge3_submission_train.csv'), quote = FALSE, row.names = FALSE);
-write.csv(x = outfile.test , file = file.path(path.output, 'Chipmunks-AML_subchallenge3_submission_test.csv' ), quote = FALSE, row.names = FALSE);
+write.csv(
+			x = outfile.train, 
+			file = file.path(path.output, 'Chipmunks-AML_subchallenge3_submission_train.csv'), 
+			quote = FALSE, 
+			row.names = FALSE
+			);
+write.csv(
+			x = outfile.test , 
+			file = file.path(path.output, 'Chipmunks-AML_subchallenge3_submission_test.csv' ), 
+			quote = FALSE, 
+			row.names = FALSE
+			);
 
 message(sprintf('Predctions on training dataset are saved as\n\t%s/Chipmunks-AML_subchallenge3_submission_train.csv', path.output));
 message(sprintf('Predctions on testing dataset are saved as\n\t%s/Chipmunks-AML_subchallenge3_submission_test.csv', path.output));

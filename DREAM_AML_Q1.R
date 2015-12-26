@@ -143,15 +143,12 @@ rocplot <- function(
 ### READ DATA and SOME PROCESSING  ################################################################
 # remove all outcome columns except for "resp.simple" which is the event of interest in sub-challenge 1
 train.data <- read.csv(path.train.data);
-# for example:
-#train.data <- read.csv('/.mounts/labs/boutroslab/private/Datasets/DREAM/DREAM9/AML/data/training_data/trainingData-release.csv');
 
 train.data <- train.data[, !names(train.data) %in% c('Overall_Survival', 'Relapse', 'Remission_Duration', 'vital.status')];
 train.data <- train.data[, !names(train.data) %in% c('X.Patient_id')];
 
 scoringData <- read.csv(path.test.data);
-# for example:
-#scoringData <- read.csv('/.mounts/labs/boutroslab/private/Datasets/DREAM/DREAM9/AML/data/test_data/scoringData-release.csv');
+
 scoringData <- scoringData[, !names(scoringData) %in% c('X.Patient_id')];
 
 # checking missingness

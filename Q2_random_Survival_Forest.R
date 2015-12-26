@@ -1,10 +1,10 @@
 # This script is trial for AML subschallenge 2
 
-# settings:
-dir.svn.root <- '~/BoutrosLab';
-dir.out <- file.path(dir.svn.root, "AlgorithmEvaluations/DREAM9/AML/Eric/Q2/");
-dir.data <- file.path(dir.svn.root, "AlgorithmEvaluations/DREAM9/AML/Eric/Data");
-dir.axiliary.funs <- file.path(dir.svn.root, "AlgorithmEvaluations/DREAM9/AML/GroupShare/");
+# settings: (blackout the path, use your own)
+dir.svn.root <- '~/Lab';
+dir.out <- file.path(dir.svn.root, "DREAM9/AML/Q2/");
+dir.data <- file.path(dir.svn.root, "DREAM9/AML/Data");
+dir.axiliary.funs <- file.path(dir.svn.root, "DREAM9/AML/GroupShare/");
 source(file.path(dir.axiliary.funs, 'get_pcc_ci.R'));
 
 # load packages
@@ -106,7 +106,7 @@ c(p = c(-1, ps)[p.max.ci], rf.perf.reduce[, p.max.ci])
 ########################################################################
 # use p=0.93, mtry = 4
 
-dir.test.data <- '~/isilon/private/Datasets/DREAM/DREAM9/AML/data/test_data';
+dir.test.data <- '~/DREAM/DREAM9/AML/data/test_data';
 aml.test <- read.csv(file.path(dir.test.data,'scoringData-release.csv'));
 # test if all clinic var in train set are all includedd in test set
 all(var.clinic %in% names(aml.test));

@@ -9,18 +9,16 @@
 ### PREAMBLE ######################################################################################
 # load required packages and scripts
 library(randomForest);
-library(BoutrosLab.statistics.classification);
-library(BoutrosLab.prognosticsignature.general);
 library(glmnet);
 library(pROC);
 
-source("~/cluster/svn/AlgorithmEvaluations/DREAM9/AML/GroupShare/maximize_bac.R");
+source("~/DREAM9/AML/GroupShare/maximize_bac.R");
 
 ### set woking dir and load training datasets #####################################################
-setwd("~/cluster/svn/AlgorithmEvaluations/DREAM9/AML/Honglei/");
+setwd("~/DREAM9/AML/Honglei/");
 
-dir.data <- "~/cluster/svn/AlgorithmEvaluations/DREAM9/AML/GroupShare/Data/";
-dir.data.test <- "~/isilon/private/Datasets/DREAM/DREAM9/AML/data/test_data";
+dir.data <- "~/DREAM9/AML/GroupShare/Data/";
+dir.data.test <- "~/DREAM/DREAM9/AML/data/test_data";
 
 
 train.data <- read.csv(file.path(dir.data, 'AML_processed.csv'));
@@ -147,7 +145,4 @@ prediction.class <- as.factor(apply(matrix(rep(NA, nrow(scoringData.clin) )),
 ));
 
 table(prediction.class);
-
-### write session info file #######################################################################
-save.session.profile(generate.filename('sub1_glmnet', 'Session.Profile', 'txt'));
 
